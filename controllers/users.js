@@ -68,10 +68,12 @@ const userUpdate = async (req, res = response) => {
 const deleteUser= async (req, res = response) => {
   const { id } = req.params;
   const user =await User.findByIdAndUpdate(id,{status: false});
+  const userVerificado= req.userVerificado;
   res.json({
     ok: true,
     message: "DELETE User",
-    id,
+    user,
+    userVerificado
   });
 
 };

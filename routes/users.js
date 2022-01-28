@@ -9,11 +9,16 @@ const { usersGet,
     userUpdate,
     deleteUser } = require("../controllers/users");
 const { esRolValido, existeCorreo, existeUserId } = require("../helpers/db-validators");
+const { validarJWT } = require("../middlewares/jwt");
+const { isAdminRoel, validRols } = require("../middlewares/rols");
 const { validarCampos } = require("../middlewares/validar-campos");
 
 router.get("/", usersGet);
 router.get("/:id", userGetId);
 router.post("/delete/:id", [
+    validarJWT,
+   // isAdminRoel,
+   validRols('ADMIN','EDITOR'),
     check('id', 'No es un id Valido').isMongoId(),
     check('id').custom(existeUserId),
     validarCampos

@@ -51,7 +51,6 @@ const userUpdate = async (req, res = response) => {
   const {_id, password,google,email,...resto}= req.body;
 
   // validad id DB
-  console.log(resto);
   if(password){
     //Hash Contraseña
     const salt = bcryptjs.genSaltSync(10);
@@ -68,12 +67,10 @@ const userUpdate = async (req, res = response) => {
 const deleteUser= async (req, res = response) => {
   const { id } = req.params;
   const user =await User.findByIdAndUpdate(id,{status: false});
-  const userVerificado= req.userVerificado;
   res.json({
     ok: true,
     message: "DELETE User",
     user,
-    userVerificado
   });
 
 };

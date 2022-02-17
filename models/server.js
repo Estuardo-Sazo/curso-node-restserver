@@ -7,6 +7,10 @@ class Server {
         this.app= express();
         this.port=process.env.PORT;
         this.userRoute='/api/user';
+        this.categoryRoute='/api/categories';
+        this.productRoute='/api/products';
+
+
         this.authRoute='/api/auth';
 
 
@@ -38,6 +42,9 @@ class Server {
 
     route(){
         this.app.use(this.authRoute,require('../routes/auth'));
+        this.app.use(this.categoryRoute,require('../routes/categories'));
+        this.app.use(this.productRoute,require('../routes/products'));
+
 
         this.app.use(this.userRoute,require('../routes/users'));
     }
